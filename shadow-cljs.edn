@@ -8,6 +8,7 @@
  [[reagent "1.1.0"]
   [re-frame "1.2.0"]
   [day8.re-frame/http-fx "0.2.3"]
+  [org.clojure/core.async "0.4.474"]
 
   [binaryage/devtools "1.0.3"]]
 

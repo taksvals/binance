@@ -2,5 +2,5 @@
 
 (def default-db
   {:name "re-frame"
-   :data [{:symbol "A"
-           :price "12"}]})
+   :data [{:symbol "Aassa"
+           :price "12345"}]})

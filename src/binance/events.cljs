@@ -11,9 +11,31 @@
    db/default-db))
 
 (re-frame/reg-event-fx ;; register an event handler
- :reload           ;; for events with this name
+ :reload-all           ;; for events with this name
  (fn [{db :db} _] ;; get the co-effects and destructure the event
    {:http-xhrio {:uri "https://www.binance.com/api/v3/ticker/price"
+                 :method :get
+                 :timeout 10000
+                 :format (ajax/json-request-format)
+                 :response-format (ajax/json-response-format {:keywords? true})
+                 :on-success [::process-response]
+                 :on-failure [::bad-response]}}))
+
+(re-frame/reg-event-fx 
+ :reload-usd          
+ (fn [{db :db} _]
+   {:http-xhrio {:uri "https://www.binance.com/fapi/v1/ticker/price"
+                 :method :get
+                 :timeout 10000
+                 :format (ajax/json-request-format)
+                 :response-format (ajax/json-response-format {:keywords? true})
+                 :on-success [::process-response]
+                 :on-failure [::bad-response]}}))
+
+(re-frame/reg-event-fx 
+ :reload-coin          
+ (fn [{db :db} _]
+   {:http-xhrio {:uri "https://www.binance.com/dapi/v1/ticker/price"
                  :method :get
                  :timeout 10000
                  :format (ajax/json-request-format)
@@ -24,9 +46,8 @@
 (re-frame/reg-event-db
   ::process-response
   (fn [db [_ response]]
-    (-> db
-        (assoc :data (js->clj response))
-        (js/console.log (:data db)))))
+    (assoc db :data (js->clj response))
+    ))
 
 (re-frame/reg-event-db
   ::bad-response
