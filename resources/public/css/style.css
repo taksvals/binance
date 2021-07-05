@@ -61,7 +61,6 @@ body {
 	border-right: 1px solid #999;
 }
  
-/* Checked */
 .form-toggle-item input[type=radio]:checked + label {
     background: #000000;
     color: #e0cece;

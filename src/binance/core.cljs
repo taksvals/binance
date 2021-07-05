@@ -10,7 +10,6 @@
                                timeout
                                 <!]]))
 
-
 (defn dev-setup []
   (when config/debug?
     (println "dev mode")))
@@ -24,9 +23,10 @@
 (defn init []
   (re-frame/dispatch-sync [::events/initialize-db])
   (dev-setup)
+  (re-frame/dispatch [:reload-all])
   (go-loop [seconds 0]
         (<! (timeout 5000))
-        (print "waited" seconds "seconds")
+        (println "waited" seconds "seconds")
         (re-frame/dispatch [@grid-value])
         (recur (+ seconds 5)))
   (mount-root))

@@ -4,8 +4,10 @@
    [re-frame.core :as re-frame]
    [binance.subs :as subs]))
 
+
 (def radio-value (r/atom 0))
 (def grid-value (r/atom :reload-all))
+
 
 (defn grid-row [{:keys [price symbol]}]
   [:div.grid {:key symbol}
@@ -21,8 +23,7 @@
     [:h2 "Symbol"]]
    [:div.grid-price
     [:h2 "Price"]]]
-    (map grid-row @data)
-  ])
+    (map grid-row @data)])
 
 (defn radio-check []
   (condp = @radio-value
@@ -33,13 +34,14 @@
 (defn main-panel []
   (let [data (re-frame/subscribe [::subs/data])]
     (fn []
-       [:div.container
+      [:div.container
        [:div.main-text
         [:h1 "Binance"]
         [:p "All prices in real time!"]]
        [:div.toggle
         [:div.form-toggle
          [:div.form-toggle-item.item-1
+          
           [:input#fid-1
            {:type "radio"
             :name "pricing"
