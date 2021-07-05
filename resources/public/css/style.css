@@ -1,6 +1,20 @@
+body {
+    background: rgb(59, 57, 57);
+}
+
 .container {
     max-width: 1100px;
     margin: auto;
+    color: #ebdede;
+    font-size: 18px;
+}
+
+.main-text {
+    text-align: center;
+}
+
+.main-text h1 {
+    font-size: 40px;
 }
 
 .grid {
@@ -9,4 +23,46 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+}
+
+.reset {
+    display: none;
+}
+
+.toggle {
+    text-align: center;
+}
+
+.form-toggle {
+	display: inline-block;
+	overflow: hidden;
+}
+.form-toggle-item {
+	display: inline-block;
+}
+.form-toggle-item input[type=radio] {
+	display: none;
+}
+.form-toggle-item label {
+	display: inline-block;
+	padding: 0px 15px;   
+	line-height: 34px;    
+	border: 1px solid #999;
+	border-right: none;
+	cursor: pointer;
+	user-select: none;   
+}
+ 
+.form-toggle .item-1 label {
+	border-radius: 6px 0 0 6px;
+}
+.form-toggle .item-3 label {
+	border-radius: 0 6px 6px 0;
+	border-right: 1px solid #999;
+}
+ 
+/* Checked */
+.form-toggle-item input[type=radio]:checked + label {
+    background: #000000;
+    color: #e0cece;
 }

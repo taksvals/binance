@@ -12,7 +12,7 @@
 
 (re-frame/reg-event-fx ;; register an event handler
  :reload-all           ;; for events with this name
- (fn [{db :db} _] ;; get the co-effects and destructure the event
+ (fn [_ _] ;; get the co-effects and destructure the event
    {:http-xhrio {:uri "https://www.binance.com/api/v3/ticker/price"
                  :method :get
                  :timeout 10000
@@ -23,7 +23,7 @@
 
 (re-frame/reg-event-fx 
  :reload-usd          
- (fn [{db :db} _]
+ (fn [_ _]
    {:http-xhrio {:uri "https://www.binance.com/fapi/v1/ticker/price"
                  :method :get
                  :timeout 10000
@@ -34,7 +34,7 @@
 
 (re-frame/reg-event-fx 
  :reload-coin          
- (fn [{db :db} _]
+ (fn [_ _]
    {:http-xhrio {:uri "https://www.binance.com/dapi/v1/ticker/price"
                  :method :get
                  :timeout 10000
@@ -51,5 +51,5 @@
 
 (re-frame/reg-event-db
   ::bad-response
-  (fn [db [_ response]]
-    (js/console.log "Failure")))
+  (fn [_ [_ response]]
+    (js/console.log response)))
