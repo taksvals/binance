@@ -11,3 +11,8 @@
  ::data
  (fn [db]
    (:data db)))
+
+(re-frame/reg-sub
+ ::now
+ (fn [cofx]
+   (:now cofx)))

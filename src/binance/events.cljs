@@ -5,6 +5,11 @@
    [ajax.core :as ajax]
    [day8.re-frame.http-fx]))
 
+(re-frame/reg-cofx
+  :now
+  (fn [cofx _data]
+    (assoc cofx :now (js/Date.))))
+
 (re-frame/reg-event-db
  ::initialize-db
  (fn [_ _]
@@ -12,7 +17,9 @@
 
 (re-frame/reg-event-fx
  :reload-all
- (fn [_ _]
+ [(re-frame/inject-cofx :now)]
+ (fn [{:keys [db] :as cofx} _]
+   (js/console.log cofx)
    {:http-xhrio {:uri "https://www.binance.com/api/v3/ticker/price"
                  :method :get
                  :timeout 10000
@@ -23,7 +30,8 @@
 
 (re-frame/reg-event-fx 
  :reload-usd
- (fn [_ _]
+ [(re-frame/inject-cofx :now)]
+ (fn [{:keys [db] :as cofx} _]
    {:http-xhrio {:uri "https://www.binance.com/fapi/v1/ticker/price"
                  :method :get
                  :timeout 10000
@@ -33,8 +41,9 @@
                  :on-failure [:bad-response]}}))
 
 (re-frame/reg-event-fx
- :reload-coin          
- (fn [_ _]
+ :reload-coin
+ [(re-frame/inject-cofx :now)]
+ (fn [{:keys [db] :as cofx} _]
    {:http-xhrio {:uri "https://www.binance.com/dapi/v1/ticker/price"
                  :method :get
                  :timeout 10000

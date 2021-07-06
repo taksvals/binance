@@ -32,7 +32,8 @@
     2 :reload-coin))
 
 (defn main-panel []
-  (let [data (re-frame/subscribe [::subs/data])]
+  (let [data (re-frame/subscribe [::subs/data])
+        now (re-frame/subscribe [::subs/now])]
     (fn []
       [:div.container
        [:div.main-text
@@ -41,7 +42,7 @@
        [:div.toggle
         [:div.form-toggle
          [:div.form-toggle-item.item-1
-          
+
           [:input#fid-1
            {:type "radio"
             :name "pricing"
