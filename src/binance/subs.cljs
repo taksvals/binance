@@ -14,5 +14,8 @@
 
 (re-frame/reg-sub
  ::now
- (fn [cofx]
-   (:now cofx)))
+ (fn [db]
+   (let [now (:now db)]
+     (str (.getHours now) ":"
+          (.getMinutes now) ":"
+          (.getSeconds now)))))

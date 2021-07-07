@@ -19,14 +19,14 @@
  :reload-all
  [(re-frame/inject-cofx :now)]
  (fn [{:keys [db] :as cofx} _]
-   (js/console.log cofx)
    {:http-xhrio {:uri "https://www.binance.com/api/v3/ticker/price"
                  :method :get
                  :timeout 10000
                  :format (ajax/json-request-format)
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success [:process-response]
-                 :on-failure [:bad-response]}}))
+                 :on-failure [:bad-response]}
+    :db (assoc db :now (:now cofx))}))
 
 (re-frame/reg-event-fx 
  :reload-usd
@@ -38,7 +38,8 @@
                  :format (ajax/json-request-format)
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success [:process-response]
-                 :on-failure [:bad-response]}}))
+                 :on-failure [:bad-response]}
+    :db (assoc db :now (:now cofx))}))
 
 (re-frame/reg-event-fx
  :reload-coin
@@ -50,7 +51,8 @@
                  :format (ajax/json-request-format)
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success [:process-response]
-                 :on-failure [:bad-response]}}))
+                 :on-failure [:bad-response]}
+    :db (assoc db :now (:now cofx))}))
 
 (re-frame/reg-event-db
   :process-response

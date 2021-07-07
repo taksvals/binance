@@ -2,4 +2,5 @@
 
 (def default-db
   {:name "re-frame"
-   :data []})
+   :data []
+   :now (js/Date.)})

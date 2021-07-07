@@ -70,6 +70,8 @@
           [:label {:for "fid-3"} "COIN"]]]
 
         [:div.reset
-         (reset! grid-value (radio-check))]]
-
+         (reset! grid-value (radio-check))]
+        [:div]
+        [:h2 @now]]
+       
        (grid data)])))
